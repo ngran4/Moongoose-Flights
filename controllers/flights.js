@@ -20,8 +20,13 @@ function index(req, res){
 };
 
 function newFlight(req, res){
-    res.render('flights/new.ejs')
+    const departingFlight = new Flight();
+    const defaultDate = departingFlight.departs;
+    const departure = defaultDate.toISOString().slice(0, 16);
+    
+    res.render('flights/new.ejs', {departure});
 };
+
 
 function create(req, res){
     console.log(req.body, '<-req.body');
