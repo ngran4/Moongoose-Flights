@@ -1,12 +1,14 @@
 const Flight = require('../models/flight')
 
 module.exports = {
-    index,
     new: newFlight,
-    create
+    create,
+    index
 };
 
 function index(req, res){
+    const date = new Date();
+
     Flight.find({}, function(err, allFlightsInDB){
         console.log(allFlightsInDB, 'all flights');
         if(err){
@@ -19,14 +21,17 @@ function index(req, res){
     });
 };
 
-function newFlight(req, res){
+function getDeparture(){
     const departingFlight = new Flight();
     const defaultDate = departingFlight.departs;
     const departure = defaultDate.toISOString().slice(0, 16);
-    
-    res.render('flights/new.ejs', {departure});
+    return departure;
 };
 
+function newFlight(req, res){
+    const departure = getDeparture();
+    res.render('flights/new.ejs', {departure});
+};
 
 function create(req, res){
     console.log(req.body, '<-req.body');
@@ -34,7 +39,6 @@ function create(req, res){
     Flight.create(req.body, function(err, flightDocCreatedInDB){
         if(err){
             console.log(err, 'error in create flight controller');
-            return res.render('flights/new.ejs');
         }
         console.log(flightDocCreatedInDB, '<- flight created in db')
         res.redirect('/flights')
