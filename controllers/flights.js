@@ -3,7 +3,8 @@ const Flight = require('../models/flight')
 module.exports = {
     new: newFlight,
     create,
-    index
+    index,
+    show
 };
 
 function index(req, res){
@@ -43,4 +44,15 @@ function create(req, res){
         console.log(flightDocCreatedInDB, '<- flight created in db')
         res.redirect('/flights')
     })
+};
+
+function show(req, res){
+    Flight.findById(req.params.id, function(err, flight){
+        if(err){
+            console.log(err, "error getting to show page")
+            res.redirect('/flights')
+        }
+        console.log(flight, 'show page')
+        res.render('/flights/show', {title: 'Flight Details', flight})
+    });
 };
