@@ -21,29 +21,3 @@ function create(req, res){
     })
     
 };
-
-
-
-// WHY CAN'T THESE BE IN THE DESTINATIONS CONTROLLER?
-
-
-// function show(req, res){
-//     const arrival = getArrival();
-//     const destinations = getDestination();
-
-//     Flight.findById(req.params.id, function(err, flightDoc) {
-//         console.log(flightDoc, "<- show page")
-//         res.render('flights/show', {flightDoc: arrival, destinations} )
-//     })
-// }
-
-// function getArrival(){
-//     const arrivingFlight = new Flight();
-//     const arrivalDate = arrivingFlight.arrival;
-//     const arrival = arrivalDate.toISOString().slice(0, 16);
-//     return arrival;
-// };
-
-// function getDestination(d){
-//     return d.destinations.map(({airport}) => airport)
-// };

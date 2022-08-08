@@ -23,7 +23,6 @@ function index(req, res){
 };
 
 function show(req, res){
-    // const arrival = getArrival();
 
     Flight.findById(req.params.id, function(err, flightDoc){
         console.log(flightDoc, 'show page')
@@ -31,13 +30,13 @@ function show(req, res){
             console.log(err, "error getting to show page")
             res.redirect('/flights')
         }
-        // const destination = getDestination(flightDoc);
         res.render('flights/show', {title: 'Flight Details', flight: flightDoc})
     });
 };
 
 function newFlight(req, res){
     const departure = getDeparture();
+    
     res.render('flights/new.ejs', {departure});
 };
 
@@ -59,13 +58,3 @@ function getDeparture(){
     const departure = defaultDate.toISOString().slice(0, 16);
     return departure;
 };
-
-// function getArrival(){
-//     const arrivingFlight = new Flight();
-//     const arrival = arrivingFlight.arrival;
-//     return arrival;
-// };
-
-// function getDestination(d){
-//     return d.destinations.map(({airport}) => airport)
-// };
