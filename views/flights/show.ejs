@@ -47,7 +47,7 @@
             <% flight.destinations.forEach(function(d) { %>
                 <tr>
                     <td><%= d.airport %></td>
-                    <td><%= d.arrival.toLocaleDateString() %></td>
+                    <td><%= d.arrival.toLocaleString() %></td>
                 </tr>
             <% }); %> 
         </tbody>
