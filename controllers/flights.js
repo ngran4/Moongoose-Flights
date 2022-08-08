@@ -22,11 +22,18 @@ function index(req, res){
     });
 };
 
-function getDeparture(){
-    const departingFlight = new Flight();
-    const defaultDate = departingFlight.departs;
-    const departure = defaultDate.toISOString().slice(0, 16);
-    return departure;
+function show(req, res){
+    const arrival = getArrival();
+
+    Flight.findById(req.params.id, function(err, flightDoc){
+        if(err){
+            console.log(err, "error getting to show page")
+            res.redirect('/flights')
+        }
+        const destination = getDestination(flightDoc);
+        console.log(flightDoc, 'show page')
+        res.render('flights/show', {title: 'Flight Details', flight: flightDoc, arrival, destination})
+    });
 };
 
 function newFlight(req, res){
@@ -37,22 +44,28 @@ function newFlight(req, res){
 function create(req, res){
     console.log(req.body, '<-req.body');
 
-    Flight.create(req.body, function(err, flightDocCreatedInDB){
+    Flight.create(req.body, function(err, flightDoc){
         if(err){
             console.log(err, 'error in create flight controller');
         }
-        console.log(flightDocCreatedInDB, '<- flight created in db')
+        console.log(flightDoc, '<- flight created in db')
         res.redirect('/flights')
     })
 };
 
-function show(req, res){
-    Flight.findById(req.params.id, function(err, flight){
-        if(err){
-            console.log(err, "error getting to show page")
-            res.redirect('/flights')
-        }
-        console.log(flight, 'show page')
-        res.render('/flights/show', {title: 'Flight Details', flight})
-    });
+function getDeparture(){
+    const departingFlight = new Flight();
+    const defaultDate = departingFlight.departs;
+    const departure = defaultDate.toISOString().slice(0, 16);
+    return departure;
+};
+
+function getArrival(){
+    const arrivingFlight = new Flight();
+    const arrival = arrivingFlight.arrival;
+    return arrival;
+};
+
+function getDestination(d){
+    return d.destinations.map(({airport}) => airport)
 };
