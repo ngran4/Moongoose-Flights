@@ -10,6 +10,9 @@ function create(req, res){
     
     // First we have to find the movie, 
     Flight.findById(req.params.id, function(err, flightDoc){
+        if(err){
+            res.redirect(`/flights/${req.params.id}`);
+        }
         // then we need to add the review (aka req body) to that movies reviww array
         console.log(flightDoc, '<- flightDoc')
         flightDoc.destinations.push(req.body); // muating doc found from the database
