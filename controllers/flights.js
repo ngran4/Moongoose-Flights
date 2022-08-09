@@ -25,20 +25,20 @@ function index(req, res){
 
 function show(req, res){
 
-    Flight.findById(req.params.id, function(err, flight){
-        console.log(flight, 'show page')
+    Flight.findById(req.params.id, function(err, flightDoc){
+        console.log(flightDoc, 'show page')
         if(err){
             console.log(err, "error getting to show page")
             res.redirect('/flights')
         }
 
-        Ticket.find({flight: flight._id}, function (err, tickets){
+        Ticket.find({flight: flightDoc._id}, function (err, tickets){
             console.log(tickets, 'tickets');
 
             res.render('flights/show', {
                 title: 'Flight Details', 
-                flight: flight, 
-                tickets: tickets
+                flight: flightDoc, 
+                tickets
             });
         });
     });

@@ -2,12 +2,16 @@
 
 <!-- <input name="seat" required pattern="[A-F][1-9]\d?"> -->
 
-<form id="new-ticket-form" action="/tickets" method="POST">
+<form id="new-ticket-form" action="/flights/<%= flight._id %>/tickets/new" method="POST">
     <label>Seat: </label>
     <input name="seat" required pattern="[A-F][1-9]\d?">
+    <br>
+    <br>
     <label>Price: </label>
     <input name="price" type="text">
     </select>
+    <br>
+    <br>
     <input type="submit" value="Add Ticket">
   </form>
 
