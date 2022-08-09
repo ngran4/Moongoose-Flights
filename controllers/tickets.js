@@ -6,7 +6,6 @@ module.exports = {
     create
 }
 
-
 function newTicket(req, res){
     Flight.findById(req.params.id, function(err, flightDoc){
         if(err) {
@@ -16,34 +15,34 @@ function newTicket(req, res){
             flight: flightDoc
         });
     });
-
-}
+};
 
 function create(req, res){
-    req.body.flight = req.params.id;
+    req.body.flight = req.params.id
+
     Ticket.create(req.body, function(err, ticket){
+        console.log(req.body, 'req bod')
         console.log(ticket, 'ticket')
+        console.log(err, "error")
         if(err) {
             console.log('error in creating ticket')
         }
-        // ticket.save(function(err) {
-        //     res.redirect(`/flights/${req.params.id}`)
-
-        // })
+      
         res.redirect(`/flights/${req.params.id}`)
     });
 };
+
 
 // function create(req, res){
 //     console.log(req.params.id, '<- params flight id');
 //     console.log(req.body, 'contents of form (ticket)');
 
 
-//     Flight.findById(req.params.id, function(err, flightDoc){
-//         console.log(flightDoc, '<- flightDoc');
-//         flightDoc.tickets.push(req.body);
-//         flightDoc.save(function(err) {
-//             res.redirect(`flights/${req.params.id}`)
+//     Flight.findById(req.params.id, function(err, flight){
+//         console.log(flight, '<- flightDoc');
+//         flight.tickets.push(req.body);
+//         flight.save(function(err) {
+//             res.redirect(`flights/${req.params.id}`, {Flight})
 //         })
 //     })
 // }

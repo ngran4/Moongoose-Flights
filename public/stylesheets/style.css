@@ -18,7 +18,7 @@ a {
 }
 
 /* Add a black background color to the top navigation */
-body > .topnav {
+body > nav {
   grid-area: nav;
   background-color: #4E8397;
   overflow: hidden;
@@ -29,7 +29,7 @@ body > .topnav {
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
+nav a {
   float: left;
   color: #f2f2f2;
   text-align: center;
@@ -39,7 +39,7 @@ body > .topnav {
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
+nav a:hover {
   background-color: #ADC5CF;
   color: white;
 }
