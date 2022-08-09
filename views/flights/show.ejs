@@ -4,13 +4,10 @@
 <section id="show-page">
     <div>Airline: </div>
     <div><%= flight.airline %> </div>
-    <br>
     <div>Flight Number: </div>
     <div><%= flight.flightNo %> </div>
-    <br>
     <div>Departing From: </div>
     <div><%= flight.airport %> </div>
-    <br>
     <div>Departure Time: </div>
     <div><%= flight.departs.toLocaleString() %> </div>
 </section>
@@ -55,23 +52,30 @@
 <% } else { %>
     <h5>No Destination Specified</h5>
 <% } %>
+<br>
+<br>
 
-<table id="ticket-table">
-    <thead>
-        <tr>
-            <th>Seat</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% tickets.forEach(function(t){ %> 
+<div class="tickets">
+    <table id="ticket-table">
+        <thead>
             <tr>
-                <td><%= t.seat %></td>
-                <td><%= t.price %> </td>
+                <th>Seat</th>
+                <th>Price</th>
             </tr>
-        <% }) %> 
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% tickets.forEach(function(t){ %> 
+                <tr>
+                    <td><%= t.seat %></td>
+                    <td><%= t.price %> </td>
+                </tr>
+            <% }) %> 
+        </tbody>
+    </table>
 
-    
+
+    <a href="/flights/<%= flight._id %>/tickets/new">New Ticket</a>
+
+</div>
+
 <%- include('../partials/footer') %>
