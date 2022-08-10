@@ -68,3 +68,4 @@ function getDeparture(){
     const departure = defaultDate.toISOString().slice(0, 16);
     return departure;
 };
+
